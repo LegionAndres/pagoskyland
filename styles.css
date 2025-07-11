@@ -1,9 +1,10 @@
-/* styles.css */
+/* Estilos generales */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f9;
     margin: 0;
     padding: 0;
+    width: 100%;
 }
 
 .container {
@@ -14,11 +15,7 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
-    text-align: center;
-    color: #2c3e50;
-}
-
+/* Formulario */
 form {
     margin-bottom: 20px;
 }
@@ -29,14 +26,16 @@ label {
     font-weight: bold;
 }
 
-input, select {
+input, select, button {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
+    border-radius: 5px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    font-size: 1rem;
 }
 
+/* Botón */
 button {
     padding: 10px 15px;
     background-color: #3498db;
@@ -50,6 +49,7 @@ button:hover {
     background-color: #2980b9;
 }
 
+/* Tabla */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -78,4 +78,45 @@ tr:nth-child(even) {
     border-radius: 4px;
     color: white;
     text-align: center;
+}
+
+/* Estilos Responsivos para dispositivos móviles */
+@media screen and (max-width: 600px) {
+    .container {
+        width: 90%; /* Aumenta el tamaño del contenedor en pantallas pequeñas */
+    }
+
+    form {
+        padding: 15px;
+    }
+
+    label, input, select, button {
+        font-size: 0.9rem; /* Reducir el tamaño de fuente para mejor ajuste */
+        padding: 8px;
+    }
+
+    table {
+        width: 100%;
+        font-size: 0.9rem; /* Reducir el tamaño de la tabla para pantallas pequeñas */
+    }
+
+    th, td {
+        padding: 8px;
+    }
+
+    /* Ajustar la visibilidad del div de equivalencia */
+    #equivalenciaDiv {
+        font-size: 0.9rem;
+    }
+}
+
+/* Estilos para pantallas muy pequeñas */
+@media screen and (max-width: 400px) {
+    body {
+        font-size: 0.8rem;
+    }
+
+    table {
+        font-size: 0.8rem;
+    }
 }
