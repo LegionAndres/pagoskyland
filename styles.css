@@ -1,4 +1,4 @@
-/* Estilos generales */
+/* styles.css */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f9;
@@ -6,76 +6,76 @@ body {
     padding: 0;
 }
 
-header {
-    background-color: #2c6b45; /* Verde oscuro */
-    color: white;
+.container {
+    width: 80%;
+    margin: 0 auto;
     padding: 20px;
-    text-align: center;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-    font-size: 2.5rem;
+    text-align: center;
+    color: #2c3e50;
 }
 
-/* Estilo del formulario */
-.form-container {
-    background-color: white;
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+form {
+    margin-bottom: 20px;
 }
 
-form label {
-    font-size: 1rem;
-    margin-bottom: 8px;
+label {
     display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
-form input, form select, form button {
+input, select {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
-form button {
-    background-color: #2c6b45; /* Verde Dólar */
+button {
+    padding: 10px 15px;
+    background-color: #3498db;
     color: white;
-    font-size: 1.1rem;
-    cursor: pointer;
     border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-form button:hover {
-    background-color: #255c36;
+button:hover {
+    background-color: #2980b9;
 }
 
-/* Estilo de la tabla */
 table {
     width: 100%;
-    margin-top: 20px;
     border-collapse: collapse;
+    margin-top: 20px;
+    border: 1px solid #ccc;
 }
 
-table th, table td {
+th, td {
     padding: 10px;
-    text-align: center;
-    border: 1px solid #ddd;
+    text-align: left;
 }
 
-table th {
-    background-color: #2c6b45;
+th {
+    background-color: #2c3e50;
     color: white;
 }
 
-table tr:nth-child(even) {
-    background-color: #f9f9f9;
+tr:nth-child(even) {
+    background-color: #ecf0f1;
 }
 
-table tr:hover {
-    background-color: #f1f1f1;
+#equivalenciaDiv {
+    margin-top: 20px;
+    background-color: #f39c12;
+    padding: 10px;
+    border-radius: 4px;
+    color: white;
+    text-align: center;
 }
