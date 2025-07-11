@@ -96,7 +96,7 @@ document.getElementById('personaForm').addEventListener('submit', function(event
         <td>${cantidadPago}</td>
         <td>${monedaPago}</td>
         <td>${formaPago}</td>
-        <td>${responsableFinal}</td> <!-- Responsable agregado aquí -->
+        <td>${responsableFinal}</td>
         <td>${equivalencia.toFixed(2)} ${monedaEquivalente}</td>
         <td><span class="delete-x" onclick="eliminarFila(this)">X</span></td> <!-- Botón para eliminar -->
     `;
