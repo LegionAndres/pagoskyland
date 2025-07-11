@@ -4,71 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Cobro Skyland</title>
-    <link rel="stylesheet" href="styles.css">  <!-- Enlace al archivo de estilos CSS -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-    <header>
+    <div class="container">
         <h1>Sistema de Cobro Skyland</h1>
-    </header>
 
-    <!-- Formulario de ingreso de personas -->
-    <form id="personaForm" class="form-container">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" required><br><br>
+        <!-- Formulario de Registro de Persona -->
+        <form id="personaForm">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" required>
 
-        <label for="estadoAsistencia">Asistencia:</label>
-        <select id="estadoAsistencia">
-            <option value="Presente">Presente</option>
-            <option value="Ausente">Ausente</option>
-        </select><br><br>
+            <label for="estadoAsistencia">Estado de Asistencia:</label>
+            <select id="estadoAsistencia" required>
+                <option value="Presente">Presente</option>
+                <option value="Ausente">Ausente</option>
+            </select>
 
-        <label for="estadoPago">Estado de Pago:</label>
-        <select id="estadoPago">
-            <option value="Pago">Pago</option>
-            <option value="Pendiente Pago">Pendiente Pago</option>
-        </select><br><br>
+            <label for="estadoPago">Estado de Pago:</label>
+            <select id="estadoPago" required>
+                <option value="Pago">Pago</option>
+                <option value="Pendiente Pago">Pendiente Pago</option>
+            </select>
 
-        <label for="cantidadPago">Cantidad Pagada:</label>
-        <input type="number" id="cantidadPago" required><br><br>
+            <label for="cantidadPago">Cantidad Pagada:</label>
+            <input type="number" id="cantidadPago" required>
 
-        <!-- Submenú para seleccionar moneda (Bolívares o Dólares) -->
-        <label for="monedaPago">Selecciona la Moneda:</label>
-        <select id="monedaPago">
-            <option value="Dolares">Dólares</option>
-            <option value="Bolivares">Bolívares</option>
-        </select><br><br>
+            <label for="monedaPago">Moneda:</label>
+            <select id="monedaPago" required>
+                <option value="Dolares">Dólares</option>
+                <option value="Bolivares">Bolívares</option>
+            </select>
 
-        <!-- Campo para ingresar tipo de cambio -->
-        <label for="tipoCambio">Tipo de Cambio (Dólares a Bolívares):</label>
-        <input type="number" id="tipoCambio" placeholder="Ej. 1 USD = 2500000 Bs" required><br><br>
+            <label for="tipoCambio">Tipo de Cambio (1 USD = Bs):</label>
+            <input type="number" id="tipoCambio" required>
 
-        <!-- Mostrar equivalencia en la moneda opuesta -->
-        <div id="equivalenciaDiv" style="display: none;">
-            <p>Equivalente en <span id="monedaEquivalente"></span>: <span id="equivalenciaResultado"></span></p>
-        </div>
+            <div id="equivalenciaDiv" style="display:none;">
+                <p><strong>Equivalente:</strong> <span id="equivalenciaResultado"></span> <span id="monedaEquivalente"></span></p>
+            </div>
 
-        <button type="submit">Registrar Persona</button>
-    </form>
+            <button type="submit">Registrar Persona</button>
+        </form>
 
-    <!-- Tabla de personas registradas -->
-    <h2>Lista de Personas Registradas</h2>
-    <table id="personasList">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Asistencia</th>
-                <th>Estado de Pago</th>
-                <th>Cantidad Pagada</th>
-                <th>Moneda</th>
-                <th>Equivalente</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Aquí se agregarán las filas dinámicamente -->
-        </tbody>
-    </table>
+        <h2>Lista de Personas Registradas:</h2>
+        <table id="personasList">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Asistencia</th>
+                    <th>Estado de Pago</th>
+                    <th>Cantidad Pagada</th>
+                    <th>Moneda</th>
+                    <th>Equivalente</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Aquí se agregarán las filas dinámicamente -->
+            </tbody>
+        </table>
+    </div>
 
-    <script src="app.js"></script> <!-- Enlace al archivo JS donde se encuentra la lógica -->
+    <script src="app.js"></script>
 </body>
 </html>
