@@ -4,6 +4,29 @@ function mostrarFormulario() {
     formulario.style.display = formulario.style.display === 'none' ? 'block' : 'none';
 }
 
+// Función para mostrar el campo de monto según el modo de pago
+function mostrarCamposModoPago() {
+    const modoPago = document.getElementById('modoPago').value;
+    const campoMonto = document.getElementById('campoMonto');
+
+    // Limpiar los campos
+    campoMonto.innerHTML = "";
+
+    if (modoPago === "Transferencia") {
+        // Si el modo de pago es Transferencia, solo mostramos un campo de cantidad
+        campoMonto.innerHTML = `
+            <label for="cantidadPago">Cantidad Transferida:</label>
+            <input type="number" id="cantidadPago" placeholder="Ingrese la cantidad transferida" required><br><br>
+        `;
+    } else if (modoPago === "Bolivares" || modoPago === "Dolares") {
+        // Si el modo de pago es en Bolívares o Dólares, mostramos el monto a ingresar y la conversión
+        campoMonto.innerHTML = `
+            <label for="cantidadPago">Cantidad a Pagar:</label>
+            <input type="number" id="cantidadPago" placeholder="Ingrese la cantidad" required><br><br>
+        `;
+    }
+}
+
 // Función para calcular la diferencia monetaria
 function calcularDiferencia() {
     const monedaOrigen = document.getElementById('monedaOrigen').value;
