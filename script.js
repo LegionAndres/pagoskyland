@@ -1,41 +1,13 @@
-// Mostrar u ocultar el formulario
-function mostrarFormulario() {
-    const formulario = document.getElementById('formulario');
-    formulario.style.display = formulario.style.display === 'none' ? 'block' : 'none';
-}
-
-// Función para mostrar el campo de monto según el modo de pago
-function mostrarCamposModoPago() {
-    const modoPago = document.getElementById('modoPago').value;
-    const campoMonto = document.getElementById('campoMonto');
-
-    // Limpiar los campos
-    campoMonto.innerHTML = "";
-
-    if (modoPago === "Transferencia") {
-        // Si el modo de pago es Transferencia, solo mostramos un campo de cantidad
-        campoMonto.innerHTML = `
-            <label for="cantidadPago">Cantidad Transferida:</label>
-            <input type="number" id="cantidadPago" placeholder="Ingrese la cantidad transferida" required><br><br>
-        `;
-    } else if (modoPago === "Bolivares" || modoPago === "Dolares") {
-        // Si el modo de pago es en Bolívares o Dólares, mostramos el monto a ingresar y la conversión
-        campoMonto.innerHTML = `
-            <label for="cantidadPago">Cantidad a Pagar:</label>
-            <input type="number" id="cantidadPago" placeholder="Ingrese la cantidad" required><br><br>
-        `;
-    }
-}
-
-// Función para calcular la diferencia monetaria
+// Función para calcular la diferencia monetaria y mostrar el resultado de los montos convertidos
 function calcularDiferencia() {
-    const monedaOrigen = document.getElementById('monedaOrigen').value;
-    const valorBCV = parseFloat(document.getElementById('valorMoneda').value);
-    const cantidadPago = parseFloat(document.getElementById('cantidadPago').value);
+    const monedaOrigen = document.getElementById('monedaOrigen').value;  // Moneda de origen (Bolívares o Dólares)
+    const valorBCV = parseFloat(document.getElementById('valorMoneda').value);  // Tasa BCV
+    const cantidadPago = parseFloat(document.getElementById('cantidadPago').value);  // Cantidad ingresada
     const montoConvertido = document.getElementById('montoConvertido');
     const montoConvertidoBcv = document.getElementById('montoConvertidoBcv');
     const modoPago = document.getElementById('modoPago').value;
 
+    // Validación para asegurarse de que los valores sean números válidos
     if (isNaN(valorBCV) || isNaN(cantidadPago) || valorBCV <= 0 || cantidadPago <= 0) {
         montoConvertido.value = "Por favor ingresa valores válidos.";
         montoConvertidoBcv.value = "Por favor ingresa valores válidos.";
@@ -60,8 +32,9 @@ function calcularDiferencia() {
         resultadoBolivares = cantidadPago * valorBCV; // Convertir a Bolívares
     }
 
-    montoConvertido.value = resultadoDolares.toFixed(2);
-    montoConvertidoBcv.value = resultadoBolivares.toFixed(2);
+    // Mostrar los resultados convertidos
+    montoConvertido.value = resultadoDolares.toFixed(2); // Monto en Dólares
+    montoConvertidoBcv.value = resultadoBolivares.toFixed(2); // Monto en Bolívares
 }
 
 // Manejar el envío del formulario
@@ -97,4 +70,3 @@ document.getElementById('personaForm').addEventListener('submit', function(event
     document.getElementById('personaForm').reset();
     mostrarFormulario(); // Ocultar el formulario después de agregar la persona
 });
-
