@@ -15,6 +15,19 @@ function mostrarCampoDestino() {
     }
 }
 
+// Función para mostrar el campo de nombre manual si se selecciona "Otro"
+function mostrarCampoNombreManual() {
+    const destinoPagoPersona = document.getElementById('destinoPagoPersona').value;
+    const campoNombreManual = document.getElementById('campoNombreManual');
+
+    // Mostrar el campo de nombre manual si se selecciona "Otro"
+    if (destinoPagoPersona === "Otro") {
+        campoNombreManual.style.display = 'block';
+    } else {
+        campoNombreManual.style.display = 'none';
+    }
+}
+
 // Función para manejar el envío del formulario
 document.getElementById('personaForm').addEventListener('submit', function(event) {
     event.preventDefault();  // Evitar el comportamiento por defecto del formulario
@@ -28,12 +41,17 @@ document.getElementById('personaForm').addEventListener('submit', function(event
     const tipoCambio = parseFloat(document.getElementById('tipoCambio').value);
     const formaPago = document.getElementById('formaPago').value;
     const destinoPago = document.getElementById('destinoPago').value;
+    const destinoPagoPersona = document.getElementById('destinoPagoPersona').value;
+    const nombreManual = document.getElementById('nombreManual').value;
 
     // Verificar que la cantidad de pago y el tipo de cambio sean válidos
     if (isNaN(cantidadPago) || isNaN(tipoCambio) || cantidadPago <= 0 || tipoCambio <= 0) {
         alert("Por favor ingresa una cantidad y tipo de cambio válidos.");
         return;
     }
+
+    // Si el destino es "Otro", tomar el nombre manual
+    const destinoFinal = destinoPagoPersona === "Otro" ? nombreManual : destinoPago;
 
     // Realizar la conversión automática si el tipo de cambio es válido
     let equivalencia = 0;
@@ -68,7 +86,7 @@ document.getElementById('personaForm').addEventListener('submit', function(event
         <td>${cantidadPago}</td>
         <td>${monedaPago}</td>
         <td>${formaPago}</td>
-        <td>${formaPago === 'Otro Banco' ? destinoPago : 'N/A'}</td>
+        <td>${destinoFinal}</td>
         <td>${equivalencia.toFixed(2)} ${monedaEquivalente}</td> <!-- Mostrar equivalencia -->
     `;
 
