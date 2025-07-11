@@ -41,6 +41,7 @@ function calcularDiferencia() {
 document.getElementById('personaForm').addEventListener('submit', function(event) {
     event.preventDefault();  // Evitar el comportamiento por defecto del formulario
 
+    // Obtener los valores del formulario
     const nombre = document.getElementById('nombre').value;
     const estadoAsistencia = document.getElementById('estadoAsistencia').value;
     const estadoPago = document.getElementById('estadoPago').value;
@@ -50,7 +51,7 @@ document.getElementById('personaForm').addEventListener('submit', function(event
     const montoConvertidoBcv = document.getElementById('montoConvertidoBcv').value;
 
     // Crear una nueva fila en la tabla
-    const tabla = document.getElementById('personasList');
+    const tabla = document.getElementById('personasList').getElementsByTagName('tbody')[0]; // Asegurarse de obtener el cuerpo de la tabla
     const fila = document.createElement('tr');
 
     fila.innerHTML = `
@@ -68,5 +69,4 @@ document.getElementById('personaForm').addEventListener('submit', function(event
 
     // Limpiar el formulario
     document.getElementById('personaForm').reset();
-    mostrarFormulario(); // Ocultar el formulario después de agregar la persona
 });
