@@ -159,6 +159,7 @@ document.getElementById('generatePDF').addEventListener('click', function() {
             text += cell.innerText + ' | ';
         });
 
+        // Si la posición Y excede el límite de la página, agregar nueva página
         if (yPosition >= 270) {
             doc.addPage();
             yPosition = 10;
@@ -168,5 +169,6 @@ document.getElementById('generatePDF').addEventListener('click', function() {
         yPosition += 10;
     });
 
+    // Guardar el PDF con el nombre 'registro-pagos.pdf'
     doc.save('registro-pagos.pdf');
 });
