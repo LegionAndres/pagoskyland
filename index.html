@@ -33,14 +33,16 @@
             </select><br><br>
 
             <label for="modoPago">Modo de Pago:</label>
-            <select id="modoPago">
+            <select id="modoPago" onchange="mostrarCamposModoPago()">
                 <option value="Bolivares">Bolívares</option>
                 <option value="Dolares">Dólares</option>
                 <option value="Transferencia">Transferencia</option>
             </select><br><br>
 
-            <label for="cantidadPago">Cantidad Pagada:</label>
-            <input type="number" id="cantidadPago" placeholder="Ingrese la cantidad" required><br><br>
+            <!-- Campo Monto según el Modo de Pago -->
+            <div id="campoMonto">
+                <!-- Aquí se cargará el campo dinámicamente -->
+            </div>
 
             <!-- Submenú para gestionar diferencias monetarias -->
             <div id="subMenu">
@@ -88,4 +90,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
