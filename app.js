@@ -98,6 +98,7 @@ document.getElementById('personaForm').addEventListener('submit', function(event
         <td>${formaPago}</td>
         <td>${responsableFinal}</td> <!-- Responsable agregado aquí -->
         <td>${equivalencia.toFixed(2)} ${monedaEquivalente}</td>
+        <td><span class="delete-x" onclick="eliminarFila(this)">X</span></td> <!-- Botón para eliminar -->
     `;
 
     tabla.appendChild(fila);
@@ -110,6 +111,41 @@ document.getElementById('personaForm').addEventListener('submit', function(event
     document.getElementById('personaForm').reset();
     document.getElementById('equivalenciaDiv').style.display = 'none';
 });
+
+// Función para eliminar una fila
+function eliminarFila(element) {
+    // Obtener la fila que contiene el "X"
+    const row = element.closest('tr');
+    
+    // Eliminar la fila de la tabla
+    row.remove();
+
+    // Actualizar los totales después de eliminar un registro
+    actualizarTotales();
+}
+
+// Función para actualizar los totales
+function actualizarTotales() {
+    totalDolares = 0;
+    totalBolivares = 0;
+
+    const rows = document.querySelectorAll('#personasList tbody tr');
+
+    rows.forEach(row => {
+        const cantidadPago = parseFloat(row.cells[3].innerText); // Cantidad Pagada
+        const monedaPago = row.cells[4].innerText; // Moneda
+
+        if (monedaPago === "Dólares") {
+            totalDolares += cantidadPago;
+        } else {
+            totalBolivares += cantidadPago;
+        }
+    });
+
+    // Mostrar los totales actualizados
+    document.getElementById('totalDolares').innerText = totalDolares.toFixed(2);
+    document.getElementById('totalBolivares').innerText = totalBolivares.toFixed(2);
+}
 
 // Generar PDF
 document.getElementById('generatePDF').addEventListener('click', function() {
