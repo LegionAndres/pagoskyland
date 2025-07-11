@@ -34,10 +34,32 @@
 
             <label for="modoPago">Modo de Pago:</label>
             <select id="modoPago">
-                <option value="Bolivares">Bol�vares</option>
-                <option value="Dolares">D�lares</option>
+                <option value="Bolivares">Bolívares</option>
+                <option value="Dolares">Dólares</option>
                 <option value="Transferencia">Transferencia</option>
             </select><br><br>
+
+            <label for="cantidadPago">Cantidad Pagada:</label>
+            <input type="number" id="cantidadPago" placeholder="Ingrese la cantidad" required><br><br>
+
+            <!-- Submenú para gestionar diferencias monetarias -->
+            <div id="subMenu">
+                <h3>Gestión de Diferencias Monetarias</h3>
+                <label for="monedaOrigen">Moneda de Origen:</label>
+                <select id="monedaOrigen" onchange="calcularDiferencia()">
+                    <option value="Bolivares">Bolívares</option>
+                    <option value="Dolares">Dólares</option>
+                </select><br><br>
+
+                <label for="valorMoneda">Valor BCV (Bolívares por Dólar):</label>
+                <input type="number" id="valorMoneda" placeholder="Valor actual del BCV" value="25" required><br><br>
+
+                <label for="montoConvertido">Monto Convertido (Dólares):</label>
+                <input type="text" id="montoConvertido" disabled><br><br>
+
+                <label for="montoConvertidoBcv">Monto Convertido (Bolívares):</label>
+                <input type="text" id="montoConvertidoBcv" disabled><br><br>
+            </div>
 
             <button type="submit">Guardar</button>
         </form>
@@ -53,10 +75,13 @@
                 <th>Estado de Asistencia</th>
                 <th>Estado de Pago</th>
                 <th>Modo de Pago</th>
+                <th>Cantidad Pagada</th>
+                <th>Monto Convertido (Dólares)</th>
+                <th>Monto Convertido (Bolívares)</th>
             </tr>
         </thead>
         <tbody id="personasList">
-            <!-- Las filas se agregan aqu� din�micamente con JavaScript -->
+            <!-- Las filas se agregan aquí dinámicamente con JavaScript -->
         </tbody>
     </table>
 
