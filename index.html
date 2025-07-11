@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Cobro Skyland</title> <!-- Título actualizado -->
-
+    <title>Sistema de Cobro Skyland</title> <!-- Título de la aplicación -->
     <link rel="stylesheet" href="styles.css">  <!-- Enlace al archivo de estilos CSS -->
 </head>
 <body>
@@ -30,33 +29,8 @@
             <option value="Pendiente Pago">Pendiente Pago</option>
         </select><br><br>
 
-        <label for="modoPago">Modo de Pago:</label>
-        <select id="modoPago">
-            <option value="Bolivares">Bolívares</option>
-            <option value="Dolares">Dólares</option>
-            <option value="Transferencia">Transferencia</option>
-        </select><br><br>
-
         <label for="cantidadPago">Cantidad Pagada:</label>
         <input type="number" id="cantidadPago" required><br><br>
-
-        <div id="subMenu" class="sub-menu">
-            <h3>Gestión de Diferencias Monetarias</h3>
-            <label for="monedaOrigen">Moneda de Origen:</label>
-            <select id="monedaOrigen" onchange="calcularDiferencia()">
-                <option value="Bolivares">Bolívares</option>
-                <option value="Dolares">Dólares</option>
-            </select><br><br>
-
-            <label for="valorMoneda">Valor BCV (Bolívares por Dólar):</label>
-            <input type="number" id="valorMoneda" placeholder="Valor actual del BCV" value="25" required><br><br>
-
-            <label for="montoConvertido">Monto Convertido (Dólares):</label>
-            <input type="text" id="montoConvertido" disabled><br><br>
-
-            <label for="montoConvertidoBcv">Monto Convertido (Bolívares):</label>
-            <input type="text" id="montoConvertidoBcv" disabled><br><br>
-        </div>
 
         <button type="submit">Registrar Persona</button>
     </form>
@@ -69,10 +43,7 @@
                 <th>Nombre</th>
                 <th>Asistencia</th>
                 <th>Estado de Pago</th>
-                <th>Modo de Pago</th>
                 <th>Cantidad Pagada</th>
-                <th>Monto Convertido (Dólares)</th>
-                <th>Monto Convertido (Bolívares)</th>
             </tr>
         </thead>
         <tbody>
