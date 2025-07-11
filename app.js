@@ -51,7 +51,7 @@ document.getElementById('personaForm').addEventListener('submit', function(event
     }
 
     // Si el destino es "Otro", tomar el nombre manual
-    const destinoFinal = destinoPagoPersona === "Otro" ? nombreManual : destinoPago;
+    const destinoFinal = destinoPagoPersona === "Otro" ? nombreManual : destinoPagoPersona;
 
     // Realizar la conversión automática si el tipo de cambio es válido
     let equivalencia = 0;
@@ -74,7 +74,7 @@ document.getElementById('personaForm').addEventListener('submit', function(event
     document.getElementById('monedaEquivalente').innerText = monedaEquivalente;
     document.getElementById('equivalenciaResultado').innerText = equivalencia.toFixed(2);
 
-    // Crear una nueva fila en la tabla
+    // Crear una nueva fila en la tabla con los datos del pago y destino
     const tabla = document.getElementById('personasList').getElementsByTagName('tbody')[0]; // Obtener el cuerpo de la tabla
     const fila = document.createElement('tr');
 
@@ -86,7 +86,7 @@ document.getElementById('personaForm').addEventListener('submit', function(event
         <td>${cantidadPago}</td>
         <td>${monedaPago}</td>
         <td>${formaPago}</td>
-        <td>${destinoFinal}</td>
+        <td>${destinoFinal}</td> <!-- Aquí agregamos la persona que recibe el pago -->
         <td>${equivalencia.toFixed(2)} ${monedaEquivalente}</td> <!-- Mostrar equivalencia -->
     `;
 
