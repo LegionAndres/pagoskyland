@@ -10,7 +10,7 @@ document.getElementById('personaForm').addEventListener('submit', function(event
     const monedaPago = document.getElementById('monedaPago').value;
     const tipoCambio = document.getElementById('tipoCambio').value;
 
-    // Verificar que la cantidad de pago no esté vacía o inválida
+    // Verificar que la cantidad de pago y el tipo de cambio sean válidos
     if (cantidadPago === "" || isNaN(cantidadPago) || tipoCambio === "" || isNaN(tipoCambio)) {
         alert("Por favor ingresa una cantidad y tipo de cambio válidos.");
         return;
@@ -52,7 +52,7 @@ document.getElementById('personaForm').addEventListener('submit', function(event
     // Agregar la fila a la tabla
     tabla.appendChild(fila);
 
-    // Limpiar el formulario
+    // Limpiar el formulario pero mantener los resultados de la equivalencia
     document.getElementById('personaForm').reset();
     document.getElementById('equivalenciaDiv').style.display = 'none';  // Ocultar la equivalencia al reiniciar
 });
