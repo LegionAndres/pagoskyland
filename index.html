@@ -17,7 +17,7 @@
             <input type="text" id="nombre" required>
 
             <label for="estadoAsistencia">Estado de Asistencia:</label>
-            <select id="estadoAsistencia" required>
+            <select id="estadoAsistencia" required onchange="verificarAsistencia()">
                 <option value="Presente">Presente</option>
                 <option value="Ausente">Ausente</option>
             </select>
@@ -25,6 +25,7 @@
             <label for="estadoPago">Estado de Pago:</label>
             <select id="estadoPago" required>
                 <option value="Pago">Pago</option>
+                <option value="Pago Incompleto">Pago Incompleto</option>
                 <option value="Pendiente Pago">Pendiente Pago</option>
             </select>
 
@@ -92,7 +93,7 @@
                     <th>Cantidad Pagada</th>
                     <th>Moneda</th>
                     <th>Forma de Pago</th>
-                    <th>Responsable</th> <!-- Cambiado "Destino de Pago" por "Responsable" -->
+                    <th>Responsable</th>
                     <th>Equivalente</th>
                 </tr>
             </thead>
