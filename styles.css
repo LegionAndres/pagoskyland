@@ -1,119 +1,105 @@
 /* Estilos generales */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
     margin: 0;
-    padding: 0;
-    width: 100%;
+    padding: 20px;
+    background-color: #f4f4f4;
 }
 
 .container {
-    width: 80%;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
     background-color: white;
+    padding: 20px;
+    border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Formulario */
-form {
+h1 {
+    text-align: center;
     margin-bottom: 20px;
 }
 
+h2 {
+    text-align: center;
+    margin-top: 40px;
+}
+
+/* Estilos del formulario */
+form {
+    display: grid;
+    gap: 15px;
+}
+
 label {
-    display: block;
-    margin-bottom: 5px;
     font-weight: bold;
 }
 
-input, select, button {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+input, select {
+    padding: 8px;
     font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
 }
 
-/* Botón */
-button {
-    padding: 10px 15px;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+/* Estilos para la tabla */
+.table-container {
+    margin-top: 30px;
+    overflow-x: auto;
 }
 
-button:hover {
-    background-color: #2980b9;
-}
-
-/* Tabla */
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    border: 1px solid #ccc;
 }
 
 th, td {
     padding: 10px;
     text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
 th {
-    background-color: #2c3e50;
-    color: white;
+    background-color: #f2f2f2;
 }
 
-tr:nth-child(even) {
-    background-color: #ecf0f1;
+td {
+    font-size: 0.9rem;
 }
 
-#equivalenciaDiv {
-    margin-top: 20px;
-    background-color: #f39c12;
-    padding: 10px;
-    border-radius: 4px;
-    color: white;
-    text-align: center;
+/* Estilo de la "X" de eliminación */
+.delete-x {
+    color: red;
+    font-weight: bold;
+    cursor: pointer;
 }
 
-/* Estilos Responsivos para dispositivos móviles */
-@media screen and (max-width: 600px) {
+/* Responsividad */
+@media (max-width: 768px) {
+    table, th, td {
+        font-size: 0.8rem;
+    }
+
+    /* Ajuste de la tabla para pantallas más pequeñas */
+    .table-container {
+        max-width: 100%;
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 480px) {
     .container {
-        width: 90%; /* Aumenta el tamaño del contenedor en pantallas pequeñas */
+        padding: 10px;
     }
 
     form {
-        padding: 15px;
+        grid-template-columns: 1fr;
     }
 
-    label, input, select, button {
-        font-size: 0.9rem; /* Reducir el tamaño de fuente para mejor ajuste */
-        padding: 8px;
-    }
-
-    table {
-        width: 100%;
-        font-size: 0.9rem; /* Reducir el tamaño de la tabla para pantallas pequeñas */
-    }
-
-    th, td {
-        padding: 8px;
-    }
-
-    /* Ajustar la visibilidad del div de equivalencia */
-    #equivalenciaDiv {
+    label, input, select {
         font-size: 0.9rem;
-    }
-}
-
-/* Estilos para pantallas muy pequeñas */
-@media screen and (max-width: 400px) {
-    body {
-        font-size: 0.8rem;
     }
 
     table {
