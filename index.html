@@ -16,13 +16,13 @@
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" required>
 
-            <label for="estadoAsistencia">Estado de Asistencia:</label>
+            <label for="estadoAsistencia">Asistencia:</label>
             <select id="estadoAsistencia" required onchange="verificarAsistencia()">
                 <option value="Presente">Presente</option>
                 <option value="Ausente">Ausente</option>
             </select>
 
-            <label for="estadoPago">Estado de Pago:</label>
+            <label for="estadoPago">Pago:</label>
             <select id="estadoPago" required>
                 <option value="Pago">Pago</option>
                 <option value="Pago Incompleto">Pago Incompleto</option>
@@ -83,25 +83,27 @@
             <button type="submit">Registrar Persona</button>
         </form>
 
-        <h2>Lista de Personas Registradas:</h2>
-        <table id="personasList">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Asistencia</th>
-                    <th>Estado de Pago</th>
-                    <th>Cantidad Pagada</th>
-                    <th>Moneda</th>
-                    <th>Forma de Pago</th>
-                    <th>Responsable</th>
-                    <th>Equivalente</th>
-                    <th>Eliminar</th> <!-- Nueva columna para eliminar registros -->
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Aquí se agregarán las filas dinámicamente -->
-            </tbody>
-        </table>
+        <h2>Registro de Participantes</h2> <!-- Cambié el título aquí -->
+        <div class="table-container">
+            <table id="personasList">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Asistencia</th>
+                        <th>Pago</th>
+                        <th>Cantidad Pagada</th>
+                        <th>Moneda</th>
+                        <th>Forma de Pago</th>
+                        <th>Responsable</th>
+                        <th>Equivalente</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí se agregarán las filas dinámicamente -->
+                </tbody>
+            </table>
+        </div>
 
         <p><strong>Total en Dólares:</strong> <span id="totalDolares">0</span></p>
         <p><strong>Total en Bolívares:</strong> <span id="totalBolivares">0</span></p>
