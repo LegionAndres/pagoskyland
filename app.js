@@ -141,6 +141,35 @@ function actualizarTotales() {
     document.getElementById('totalBolivares').innerText = totalBolivares.toFixed(2);
 }
 
+// Función para descargar la tabla como un archivo CSV
+document.getElementById('downloadCSV').addEventListener('click', function () {
+    const table = document.getElementById('personasList');
+    const rows = table.querySelectorAll('tr');
+    
+    let csvContent = '';
+    
+    // Recorrer las filas de la tabla
+    rows.forEach((row, index) => {
+        const cells = row.querySelectorAll('th, td');
+        const rowArray = [];
+
+        // Recorrer las celdas de cada fila
+        cells.forEach(cell => {
+            rowArray.push(cell.innerText); // Extraer el texto de cada celda
+        });
+        
+        // Unir las celdas con una coma (formato CSV)
+        csvContent += rowArray.join(',') + '\n';
+    });
+
+    // Crear un enlace temporal para descargar el archivo CSV
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'registro-pagos.csv'; // Nombre del archivo
+    link.click(); // Simula el clic para descargar el archivo
+});
+
 // Generar PDF
 document.getElementById('generatePDF').addEventListener('click', function() {
     const { jsPDF } = window.jspdf;
@@ -169,6 +198,5 @@ document.getElementById('generatePDF').addEventListener('click', function() {
         yPosition += 10;
     });
 
-    // Guardar el PDF con el nombre 'registro-pagos.pdf'
     doc.save('registro-pagos.pdf');
 });
