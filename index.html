@@ -40,6 +40,26 @@
             <label for="tipoCambio">Tipo de Cambio (1 USD = Bs):</label>
             <input type="number" id="tipoCambio" required>
 
+            <label for="formaPago">Forma de Pago:</label>
+            <select id="formaPago" required onchange="mostrarCampoDestino()">
+                <option value="Efectivo Bolivares">Efectivo Bolívares</option>
+                <option value="Efectivo Divisa">Efectivo Divisa</option>
+                <option value="Transferencia Bolivares">Transferencia Bolívares</option>
+                <option value="Transferencia Dolares">Transferencia Dólares</option>
+                <option value="Pago Movil Venezuela">Pago Móvil Venezuela</option>
+                <option value="Pago Movil Banesco">Pago Móvil Banesco</option>
+                <option value="Pago Movil Mercantil">Pago Móvil Mercantil</option>
+                <option value="Pago Movil Tesoro">Pago Móvil Tesoro</option>
+                <option value="Pago Movil Banca Amiga">Pago Móvil Banca Amiga</option>
+                <option value="Otro Banco">Otro Banco</option>
+            </select>
+
+            <!-- Campo para ingresar el destino si se selecciona "Otro Banco" -->
+            <div id="campoDestino" style="display:none;">
+                <label for="destinoPago">Destino de Pago (Especificar Banco):</label>
+                <input type="text" id="destinoPago" placeholder="Escribir nombre del banco">
+            </div>
+
             <div id="equivalenciaDiv" style="display:none;">
                 <p><strong>Equivalente:</strong> <span id="equivalenciaResultado"></span> <span id="monedaEquivalente"></span></p>
             </div>
@@ -56,6 +76,8 @@
                     <th>Estado de Pago</th>
                     <th>Cantidad Pagada</th>
                     <th>Moneda</th>
+                    <th>Forma de Pago</th>
+                    <th>Destino de Pago</th>
                     <th>Equivalente</th>
                 </tr>
             </thead>
@@ -68,8 +90,12 @@
         <p><strong>Total en Dólares:</strong> <span id="totalDolares">0</span></p>
         <p><strong>Total en Bolívares:</strong> <span id="totalBolivares">0</span></p>
 
+        <!-- Botón para generar PDF -->
+        <button id="generatePDF">Generar PDF</button>
     </div>
 
+    <!-- Incluir jsPDF desde CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
