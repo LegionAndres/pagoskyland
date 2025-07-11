@@ -1,3 +1,7 @@
+// Variables para acumular los totales
+let totalDolares = 0;
+let totalBolivares = 0;
+
 // Función para manejar el envío del formulario
 document.getElementById('personaForm').addEventListener('submit', function(event) {
     event.preventDefault();  // Evitar el comportamiento por defecto del formulario
@@ -6,12 +10,12 @@ document.getElementById('personaForm').addEventListener('submit', function(event
     const nombre = document.getElementById('nombre').value;
     const estadoAsistencia = document.getElementById('estadoAsistencia').value;
     const estadoPago = document.getElementById('estadoPago').value;
-    const cantidadPago = document.getElementById('cantidadPago').value;
+    const cantidadPago = parseFloat(document.getElementById('cantidadPago').value);
     const monedaPago = document.getElementById('monedaPago').value;
-    const tipoCambio = document.getElementById('tipoCambio').value;
+    const tipoCambio = parseFloat(document.getElementById('tipoCambio').value);
 
     // Verificar que la cantidad de pago y el tipo de cambio sean válidos
-    if (cantidadPago === "" || isNaN(cantidadPago) || tipoCambio === "" || isNaN(tipoCambio)) {
+    if (isNaN(cantidadPago) || isNaN(tipoCambio) || cantidadPago <= 0 || tipoCambio <= 0) {
         alert("Por favor ingresa una cantidad y tipo de cambio válidos.");
         return;
     }
@@ -24,10 +28,12 @@ document.getElementById('personaForm').addEventListener('submit', function(event
         // Si el pago es en Dólares, calcular el equivalente en Bolívares
         equivalencia = cantidadPago * tipoCambio;
         monedaEquivalente = "Bolívares";
+        totalDolares += cantidadPago;  // Sumar a total en Dólares
     } else if (monedaPago === "Bolivares") {
         // Si el pago es en Bolívares, calcular el equivalente en Dólares
         equivalencia = cantidadPago / tipoCambio;
         monedaEquivalente = "Dólares";
+        totalBolivares += cantidadPago;  // Sumar a total en Bolívares
     }
 
     // Mostrar el equivalente calculado en la interfaz
@@ -51,6 +57,10 @@ document.getElementById('personaForm').addEventListener('submit', function(event
 
     // Agregar la fila a la tabla
     tabla.appendChild(fila);
+
+    // Actualizar los totales
+    document.getElementById('totalDolares').innerText = totalDolares.toFixed(2);
+    document.getElementById('totalBolivares').innerText = totalBolivares.toFixed(2);
 
     // Limpiar el formulario pero mantener los resultados de la equivalencia
     document.getElementById('personaForm').reset();
