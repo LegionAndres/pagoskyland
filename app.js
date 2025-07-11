@@ -2,6 +2,19 @@
 let totalDolares = 0;
 let totalBolivares = 0;
 
+// Función para mostrar el campo de destino solo si se selecciona "Otro Banco"
+function mostrarCampoDestino() {
+    const formaPago = document.getElementById('formaPago').value;
+    const campoDestino = document.getElementById('campoDestino');
+
+    // Mostrar el campo de destino solo si se selecciona "Otro Banco"
+    if (formaPago === "Otro Banco") {
+        campoDestino.style.display = 'block';
+    } else {
+        campoDestino.style.display = 'none';
+    }
+}
+
 // Función para manejar el envío del formulario
 document.getElementById('personaForm').addEventListener('submit', function(event) {
     event.preventDefault();  // Evitar el comportamiento por defecto del formulario
@@ -13,6 +26,8 @@ document.getElementById('personaForm').addEventListener('submit', function(event
     const cantidadPago = parseFloat(document.getElementById('cantidadPago').value);
     const monedaPago = document.getElementById('monedaPago').value;
     const tipoCambio = parseFloat(document.getElementById('tipoCambio').value);
+    const formaPago = document.getElementById('formaPago').value;
+    const destinoPago = document.getElementById('destinoPago').value;
 
     // Verificar que la cantidad de pago y el tipo de cambio sean válidos
     if (isNaN(cantidadPago) || isNaN(tipoCambio) || cantidadPago <= 0 || tipoCambio <= 0) {
@@ -52,6 +67,8 @@ document.getElementById('personaForm').addEventListener('submit', function(event
         <td>${estadoPago}</td>
         <td>${cantidadPago}</td>
         <td>${monedaPago}</td>
+        <td>${formaPago}</td>
+        <td>${formaPago === 'Otro Banco' ? destinoPago : 'N/A'}</td>
         <td>${equivalencia.toFixed(2)} ${monedaEquivalente}</td> <!-- Mostrar equivalencia -->
     `;
 
@@ -65,4 +82,31 @@ document.getElementById('personaForm').addEventListener('submit', function(event
     // Limpiar el formulario pero mantener los resultados de la equivalencia
     document.getElementById('personaForm').reset();
     document.getElementById('equivalenciaDiv').style.display = 'none';  // Ocultar la equivalencia al reiniciar
+});
+
+// Generar PDF
+document.getElementById('generatePDF').addEventListener('click', function() {
+    const { jsPDF } = window.jspdf;  // Acceder a la librería jsPDF
+    const doc = new jsPDF();
+
+    // Agregar un título al PDF
+    doc.text('Sistema de Cobro Skyland', 20, 10);
+
+    // Capturar la tabla de personas registradas
+    const table = document.getElementById('personasList');
+    const rows = table.querySelectorAll('tr');
+
+    let yPosition = 20;
+    rows.forEach(row => {
+        const cells = row.querySelectorAll('td, th');
+        let text = '';
+        cells.forEach(cell => {
+            text += cell.innerText + ' | ';
+        });
+        doc.text(text, 20, yPosition);
+        yPosition += 10;
+    });
+
+    // Guardar el PDF con el nombre 'registro-pagos.pdf'
+    doc.save('registro-pagos.pdf');
 });
