@@ -11,6 +11,7 @@ function calcularDiferencia() {
     const cantidadPago = parseFloat(document.getElementById('cantidadPago').value);
     const montoConvertido = document.getElementById('montoConvertido');
     const montoConvertidoBcv = document.getElementById('montoConvertidoBcv');
+    const modoPago = document.getElementById('modoPago').value;
 
     if (isNaN(valorBCV) || isNaN(cantidadPago) || valorBCV <= 0 || cantidadPago <= 0) {
         montoConvertido.value = "Por favor ingresa valores válidos.";
@@ -18,15 +19,22 @@ function calcularDiferencia() {
         return;
     }
 
-    let resultadoDolares;
-    let resultadoBolivares;
+    let resultadoDolares = cantidadPago;
+    let resultadoBolivares = cantidadPago;
 
-    if (monedaOrigen === "Bolivares") {
+    // Cálculo automático dependiendo de la moneda de origen y el modo de pago
+    if (monedaOrigen === "Bolivares" && modoPago === "Dolares") {
         resultadoDolares = cantidadPago / valorBCV; // Convertir de Bolívares a Dólares
         resultadoBolivares = cantidadPago; // Monto ya está en Bolívares
-    } else if (monedaOrigen === "Dolares") {
+    } else if (monedaOrigen === "Dolares" && modoPago === "Bolivares") {
         resultadoDolares = cantidadPago; // Monto ya está en Dólares
         resultadoBolivares = cantidadPago * valorBCV; // Convertir de Dólares a Bolívares
+    } else if (monedaOrigen === "Bolivares" && modoPago === "Bolivares") {
+        resultadoDolares = cantidadPago / valorBCV; // Solo mostrar monto en Dólares
+        resultadoBolivares = cantidadPago; // Solo mostrar monto en Bolívares
+    } else if (monedaOrigen === "Dolares" && modoPago === "Dolares") {
+        resultadoDolares = cantidadPago; // Solo mostrar monto en Dólares
+        resultadoBolivares = cantidadPago * valorBCV; // Convertir a Bolívares
     }
 
     montoConvertido.value = resultadoDolares.toFixed(2);
