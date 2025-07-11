@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Cobro Skyland</title> <!-- Título de la aplicación -->
+    <title>Sistema de Cobro Skyland</title>
     <link rel="stylesheet" href="styles.css">  <!-- Enlace al archivo de estilos CSS -->
 </head>
 <body>
@@ -32,6 +32,22 @@
         <label for="cantidadPago">Cantidad Pagada:</label>
         <input type="number" id="cantidadPago" required><br><br>
 
+        <!-- Submenú para seleccionar moneda (Bolívares o Dólares) -->
+        <label for="monedaPago">Selecciona la Moneda:</label>
+        <select id="monedaPago">
+            <option value="Dolares">Dólares</option>
+            <option value="Bolivares">Bolívares</option>
+        </select><br><br>
+
+        <!-- Campo para ingresar tipo de cambio -->
+        <label for="tipoCambio">Tipo de Cambio (Dólares a Bolívares):</label>
+        <input type="number" id="tipoCambio" placeholder="Ej. 1 USD = 2500000 Bs" required><br><br>
+
+        <!-- Mostrar equivalencia en la moneda opuesta -->
+        <div id="equivalenciaDiv" style="display: none;">
+            <p>Equivalente en <span id="monedaEquivalente"></span>: <span id="equivalenciaResultado"></span></p>
+        </div>
+
         <button type="submit">Registrar Persona</button>
     </form>
 
@@ -44,6 +60,8 @@
                 <th>Asistencia</th>
                 <th>Estado de Pago</th>
                 <th>Cantidad Pagada</th>
+                <th>Moneda</th>
+                <th>Equivalente</th>
             </tr>
         </thead>
         <tbody>
