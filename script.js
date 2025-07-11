@@ -4,7 +4,36 @@ function mostrarFormulario() {
     formulario.style.display = formulario.style.display === 'none' ? 'block' : 'none';
 }
 
-// Manejar el env�o del formulario
+// Función para calcular la diferencia monetaria
+function calcularDiferencia() {
+    const monedaOrigen = document.getElementById('monedaOrigen').value;
+    const valorBCV = parseFloat(document.getElementById('valorMoneda').value);
+    const cantidadPago = parseFloat(document.getElementById('cantidadPago').value);
+    const montoConvertido = document.getElementById('montoConvertido');
+    const montoConvertidoBcv = document.getElementById('montoConvertidoBcv');
+
+    if (isNaN(valorBCV) || isNaN(cantidadPago) || valorBCV <= 0 || cantidadPago <= 0) {
+        montoConvertido.value = "Por favor ingresa valores válidos.";
+        montoConvertidoBcv.value = "Por favor ingresa valores válidos.";
+        return;
+    }
+
+    let resultadoDolares;
+    let resultadoBolivares;
+
+    if (monedaOrigen === "Bolivares") {
+        resultadoDolares = cantidadPago / valorBCV; // Convertir de Bolívares a Dólares
+        resultadoBolivares = cantidadPago; // Monto ya está en Bolívares
+    } else if (monedaOrigen === "Dolares") {
+        resultadoDolares = cantidadPago; // Monto ya está en Dólares
+        resultadoBolivares = cantidadPago * valorBCV; // Convertir de Dólares a Bolívares
+    }
+
+    montoConvertido.value = resultadoDolares.toFixed(2);
+    montoConvertidoBcv.value = resultadoBolivares.toFixed(2);
+}
+
+// Manejar el envío del formulario
 document.getElementById('personaForm').addEventListener('submit', function(event) {
     event.preventDefault();  // Evitar el comportamiento por defecto del formulario
 
@@ -12,6 +41,9 @@ document.getElementById('personaForm').addEventListener('submit', function(event
     const estadoAsistencia = document.getElementById('estadoAsistencia').value;
     const estadoPago = document.getElementById('estadoPago').value;
     const modoPago = document.getElementById('modoPago').value;
+    const cantidadPago = document.getElementById('cantidadPago').value;
+    const montoConvertido = document.getElementById('montoConvertido').value;
+    const montoConvertidoBcv = document.getElementById('montoConvertidoBcv').value;
 
     // Crear una nueva fila en la tabla
     const tabla = document.getElementById('personasList');
@@ -22,6 +54,9 @@ document.getElementById('personaForm').addEventListener('submit', function(event
         <td>${estadoAsistencia}</td>
         <td>${estadoPago}</td>
         <td>${modoPago}</td>
+        <td>${cantidadPago}</td>
+        <td>${montoConvertido}</td>
+        <td>${montoConvertidoBcv}</td>
     `;
 
     // Agregar la fila a la tabla
@@ -29,5 +64,6 @@ document.getElementById('personaForm').addEventListener('submit', function(event
 
     // Limpiar el formulario
     document.getElementById('personaForm').reset();
-    mostrarFormulario(); // Ocultar el formulario despu�s de agregar la persona
+    mostrarFormulario(); // Ocultar el formulario después de agregar la persona
 });
+
