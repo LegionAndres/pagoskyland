@@ -28,6 +28,19 @@ function mostrarCampoNombreManual() {
     }
 }
 
+// Función para verificar la asistencia
+function verificarAsistencia() {
+    const estadoAsistencia = document.getElementById('estadoAsistencia').value;
+    const cantidadPago = document.getElementById('cantidadPago');
+
+    // Si la persona está ausente, no es obligatorio ingresar el monto, pero se puede registrar
+    if (estadoAsistencia === "Ausente") {
+        cantidadPago.removeAttribute("required");
+    } else {
+        cantidadPago.setAttribute("required", "true");
+    }
+}
+
 // Función para manejar el envío del formulario
 document.getElementById('personaForm').addEventListener('submit', function(event) {
     event.preventDefault();  // Evitar el comportamiento por defecto del formulario
@@ -45,7 +58,7 @@ document.getElementById('personaForm').addEventListener('submit', function(event
     const nombreManual = document.getElementById('nombreManual').value;
 
     // Verificar que la cantidad de pago y el tipo de cambio sean válidos
-    if (isNaN(cantidadPago) || isNaN(tipoCambio) || cantidadPago <= 0 || tipoCambio <= 0) {
+    if (isNaN(cantidadPago) || isNaN(tipoCambio) || cantidadPago < 0 || tipoCambio <= 0) {
         alert("Por favor ingresa una cantidad y tipo de cambio válidos.");
         return;
     }
@@ -58,15 +71,13 @@ document.getElementById('personaForm').addEventListener('submit', function(event
     let monedaEquivalente = '';
     
     if (monedaPago === "Dolares") {
-        // Si el pago es en Dólares, calcular el equivalente en Bolívares
         equivalencia = cantidadPago * tipoCambio;
         monedaEquivalente = "Bolívares";
-        totalDolares += cantidadPago;  // Sumar a total en Dólares
+        totalDolares += cantidadPago;
     } else if (monedaPago === "Bolivares") {
-        // Si el pago es en Bolívares, calcular el equivalente en Dólares
         equivalencia = cantidadPago / tipoCambio;
         monedaEquivalente = "Dólares";
-        totalBolivares += cantidadPago;  // Sumar a total en Bolívares
+        totalBolivares += cantidadPago;
     }
 
     // Mostrar el equivalente calculado en la interfaz
@@ -75,10 +86,9 @@ document.getElementById('personaForm').addEventListener('submit', function(event
     document.getElementById('equivalenciaResultado').innerText = equivalencia.toFixed(2);
 
     // Crear una nueva fila en la tabla con los datos del pago y responsable
-    const tabla = document.getElementById('personasList').getElementsByTagName('tbody')[0]; // Obtener el cuerpo de la tabla
+    const tabla = document.getElementById('personasList').getElementsByTagName('tbody')[0];
     const fila = document.createElement('tr');
 
-    // Insertar los datos en la fila
     fila.innerHTML = `
         <td>${nombre}</td>
         <td>${estadoAsistencia}</td>
@@ -86,11 +96,10 @@ document.getElementById('personaForm').addEventListener('submit', function(event
         <td>${cantidadPago}</td>
         <td>${monedaPago}</td>
         <td>${formaPago}</td>
-        <td>${responsableFinal}</td> <!-- Aquí agregamos la persona responsable del pago -->
-        <td>${equivalencia.toFixed(2)} ${monedaEquivalente}</td> <!-- Mostrar equivalencia -->
+        <td>${responsableFinal}</td> <!-- Responsable agregado aquí -->
+        <td>${equivalencia.toFixed(2)} ${monedaEquivalente}</td>
     `;
 
-    // Agregar la fila a la tabla
     tabla.appendChild(fila);
 
     // Actualizar los totales
@@ -99,18 +108,16 @@ document.getElementById('personaForm').addEventListener('submit', function(event
 
     // Limpiar el formulario pero mantener los resultados de la equivalencia
     document.getElementById('personaForm').reset();
-    document.getElementById('equivalenciaDiv').style.display = 'none';  // Ocultar la equivalencia al reiniciar
+    document.getElementById('equivalenciaDiv').style.display = 'none';
 });
 
 // Generar PDF
 document.getElementById('generatePDF').addEventListener('click', function() {
-    const { jsPDF } = window.jspdf;  // Acceder a la librería jsPDF
+    const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
-    // Agregar un título al PDF
     doc.text('Sistema de Cobro Skyland', 20, 10);
 
-    // Capturar la tabla de personas registradas
     const table = document.getElementById('personasList');
     const rows = table.querySelectorAll('tr');
 
@@ -125,6 +132,5 @@ document.getElementById('generatePDF').addEventListener('click', function() {
         yPosition += 10;
     });
 
-    // Guardar el PDF con el nombre 'registro-pagos.pdf'
     doc.save('registro-pagos.pdf');
 });
