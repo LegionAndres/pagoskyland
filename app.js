@@ -113,11 +113,13 @@ document.getElementById('personaForm').addEventListener('submit', function(event
 
 // Generar PDF
 document.getElementById('generatePDF').addEventListener('click', function() {
-    const { jsPDF } = window.jspdf;
+    const { jsPDF } = window.jspdf;  // Acceder a la librería jsPDF
     const doc = new jsPDF();
 
+    // Agregar un título al PDF
     doc.text('Sistema de Cobro Skyland', 20, 10);
 
+    // Capturar la tabla de personas registradas
     const table = document.getElementById('personasList');
     const rows = table.querySelectorAll('tr');
 
@@ -132,5 +134,6 @@ document.getElementById('generatePDF').addEventListener('click', function() {
         yPosition += 10;
     });
 
+    // Guardar el PDF con el nombre 'registro-pagos.pdf'
     doc.save('registro-pagos.pdf');
 });
