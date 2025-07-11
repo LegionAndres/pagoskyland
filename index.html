@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Personas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Lista de Personas</h1>
+        <button onclick="mostrarFormulario()">Agregar Persona</button>
+    </header>
+
+    <!-- Formulario para agregar personas -->
+    <div id="formulario" style="display:none;">
+        <h2>Agregar Persona</h2>
+        <form id="personaForm">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" required><br><br>
+
+            <label for="estadoAsistencia">Estado de Asistencia:</label>
+            <select id="estadoAsistencia">
+                <option value="Presente">Presente</option>
+                <option value="Ausente">Ausente</option>
+            </select><br><br>
+
+            <label for="estadoPago">Estado de Pago:</label>
+            <select id="estadoPago">
+                <option value="Pago">Pago</option>
+                <option value="Pendiente">Pendiente</option>
+            </select><br><br>
+
+            <label for="modoPago">Modo de Pago:</label>
+            <select id="modoPago">
+                <option value="Bolivares">Bolívares</option>
+                <option value="Dolares">Dólares</option>
+                <option value="Transferencia">Transferencia</option>
+            </select><br><br>
+
+            <button type="submit">Guardar</button>
+        </form>
+    </div>
+
+    <hr>
+
+    <!-- Tabla para mostrar personas -->
+    <table id="personasTable">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Estado de Asistencia</th>
+                <th>Estado de Pago</th>
+                <th>Modo de Pago</th>
+            </tr>
+        </thead>
+        <tbody id="personasList">
+            <!-- Las filas se agregan aquí dinámicamente con JavaScript -->
+        </tbody>
+    </table>
+
+    <script src="script.js"></script>
+</body>
+</html>
