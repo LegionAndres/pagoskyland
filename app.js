@@ -98,7 +98,7 @@ document.getElementById('personaForm').addEventListener('submit', function(event
         <td>${formaPago}</td>
         <td>${responsableFinal}</td>
         <td>${equivalencia.toFixed(2)} ${monedaEquivalente}</td>
-        <td><span class="delete-x" onclick="eliminarFila(this)">X</span></td> <!-- Botón para eliminar -->
+        <td><span class="delete-x" onclick="eliminarFila(this)">X</span></td>
     `;
 
     tabla.appendChild(fila);
@@ -114,13 +114,8 @@ document.getElementById('personaForm').addEventListener('submit', function(event
 
 // Función para eliminar una fila
 function eliminarFila(element) {
-    // Obtener la fila que contiene el "X"
     const row = element.closest('tr');
-    
-    // Eliminar la fila de la tabla
     row.remove();
-
-    // Actualizar los totales después de eliminar un registro
     actualizarTotales();
 }
 
@@ -132,8 +127,8 @@ function actualizarTotales() {
     const rows = document.querySelectorAll('#personasList tbody tr');
 
     rows.forEach(row => {
-        const cantidadPago = parseFloat(row.cells[3].innerText); // Cantidad Pagada
-        const monedaPago = row.cells[4].innerText; // Moneda
+        const cantidadPago = parseFloat(row.cells[3].innerText);
+        const monedaPago = row.cells[4].innerText;
 
         if (monedaPago === "Dólares") {
             totalDolares += cantidadPago;
@@ -142,34 +137,36 @@ function actualizarTotales() {
         }
     });
 
-    // Mostrar los totales actualizados
     document.getElementById('totalDolares').innerText = totalDolares.toFixed(2);
     document.getElementById('totalBolivares').innerText = totalBolivares.toFixed(2);
 }
 
 // Generar PDF
 document.getElementById('generatePDF').addEventListener('click', function() {
-    const { jsPDF } = window.jspdf;  // Acceder a la librería jsPDF
+    const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
-    // Agregar un título al PDF
-    doc.text('Sistema de Cobro Skyland', 20, 10);
+    doc.text('Sistema de Cobro Skyland - Registro de Participantes', 20, 10);
 
-    // Capturar la tabla de personas registradas
     const table = document.getElementById('personasList');
     const rows = table.querySelectorAll('tr');
 
     let yPosition = 20;
     rows.forEach(row => {
-        const cells = row.querySelectorAll('td, th');
+        const cells = row.querySelectorAll('td');
         let text = '';
         cells.forEach(cell => {
             text += cell.innerText + ' | ';
         });
+
+        if (yPosition >= 270) {
+            doc.addPage();
+            yPosition = 10;
+        }
+
         doc.text(text, 20, yPosition);
         yPosition += 10;
     });
 
-    // Guardar el PDF con el nombre 'registro-pagos.pdf'
     doc.save('registro-pagos.pdf');
 });
